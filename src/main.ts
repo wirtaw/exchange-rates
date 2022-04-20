@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger: ['debug'] });
   app.useGlobalPipes(new ValidationPipe());
 
   const APP_NAME = process.env.npm_package_name;

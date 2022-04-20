@@ -16,9 +16,8 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+    return request(app.getHttpServer()).get('/').expect(200)
+      .expect(`<h1>Exchange rates</h1>
+Visit <a href="/swagger">docs</a> to try exchange API`);
   });
 });
