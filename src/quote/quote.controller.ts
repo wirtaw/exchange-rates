@@ -6,6 +6,7 @@ import {
   HttpStatus,
   ParseIntPipe,
   DefaultValuePipe,
+  Logger,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -22,6 +23,7 @@ import { QuoteResponseDto } from './dto/quoteResponse.dto';
 @ApiTags('quote')
 @Controller('quote')
 export class QuoteController {
+  private readonly logger = new Logger(QuoteController.name);
   constructor(private readonly quoteService: QuoteService) {}
 
   @ApiOperation({ summary: 'Get quote to convert currencies' })
@@ -35,7 +37,7 @@ export class QuoteController {
     description: 'No quote',
   })
   @ApiBadRequestResponse({
-    description: 'param not valid',
+    description: 'Param not valid',
   })
   @ApiInternalServerErrorResponse({
     description: 'Internal server error',
@@ -49,6 +51,9 @@ export class QuoteController {
     @Query('baseAmount', ParseIntPipe)
     baseAmount: number,
   ): QuoteResponseDto {
+    this.logger.debug(
+      `getQuote from ${baseCurrency} to ${quoteCurrency} with amount ${baseAmount}`,
+    );
     if (baseCurrency === quoteCurrency) {
       throw new HttpException(
         `baseCurrency:${baseCurrency} and quoteCurrency:${quoteCurrency} must differ`,
@@ -56,10 +61,19 @@ export class QuoteController {
       );
     }
 
-    return this.quoteService.calculate({
+    const result: QuoteResponseDto = this.quoteService.calculate({
       baseCurrency,
       quoteCurrency,
       baseAmount,
     });
+
+    if (result.exchangeRate === 0) {
+      throw new HttpException(
+        `exchangeRate:${result.exchangeRate} is equal zero`,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
+    return result;
   }
 }

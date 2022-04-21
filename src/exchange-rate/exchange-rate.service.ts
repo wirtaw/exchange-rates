@@ -4,6 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { Observable } from 'rxjs';
 import { AxiosResponse } from 'axios';
 import { ExchangeRateResponse } from './exchange-rate-response.interface';
+import { Cache } from '../cache/cache';
 
 export interface Rate {
   [key: string]: number;
@@ -12,7 +13,7 @@ export interface Rate {
 @Injectable()
 export class ExchangeRateService {
   private readonly logger = new Logger(ExchangeRateService.name);
-  public rates = new Map();
+  public rates = new Cache();
 
   constructor(
     private httpService: HttpService,
@@ -39,12 +40,10 @@ export class ExchangeRateService {
         res.subscribe((value) => {
           if (value?.data?.base_code && value?.data?.rates) {
             const { base_code, rates } = value.data;
-            const filtered: Rate = {};
-            for (const cur of otherSuggested) {
-              filtered[cur] = rates[cur];
-            }
 
-            this.rates.set(base_code, filtered);
+            for (const currency of otherSuggested) {
+              this.rates.set(`${base_code}:${currency}`, rates[currency]);
+            }
           }
         });
       }
@@ -52,18 +51,16 @@ export class ExchangeRateService {
   }
 
   getRate(baseCurrency: string, rateCurrency: string): number {
-    if (!this.rates.has(baseCurrency)) {
+    if (!this.rates.has(`${baseCurrency}:${rateCurrency}`)) {
       return 0;
     }
 
-    const rates = this.rates.get(baseCurrency);
-    if (!rates[rateCurrency]) {
+    const rate = this.rates.get(`${baseCurrency}:${rateCurrency}`);
+    if (!rate) {
       return 0;
     }
-    this.logger.debug(
-      `getRate ${baseCurrency} ${rateCurrency} ${rates[rateCurrency]}`,
-    );
+    this.logger.debug(`getRate ${baseCurrency} ${rateCurrency} ${rate}`);
 
-    return rates[rateCurrency];
+    return rate;
   }
 }

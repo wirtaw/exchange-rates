@@ -32,6 +32,25 @@
 $ npm install
 ```
 
+## Configuring
+
+```bash
+cp .env.example .env
+```
+Modify env:
+
+`PORT` - application port. By default `3000`
+
+`HOST` - application host. By default `0.0.0.0`
+
+`HTTP_TIMEOUT` - axios request timeout. By default `3000`
+
+`HTTP_MAX_REDIRECTS` - axios request redirects. By default `5`
+
+`EXCHANGE_URL` - exchange url to get rates. By default `https://open.er-api.com/v6/latest/`
+
+`SUGGESTED_CURRENCIES` - list suggested currencies. By default `EUR,USD,GBP,ILS`
+
 ## Running the app
 
 ```bash
