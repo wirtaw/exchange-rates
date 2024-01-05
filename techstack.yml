@@ -1,7 +1,8 @@
 repo_name: wirtaw/exchange-rates
-report_id: 86d616abfa85ac33c4e471df39573012
+report_id: ea4b719c9d910eeeed544ff056f8f7cb
+version: 0.1
 repo_type: Public
-timestamp: '2023-12-14T10:27:06+00:00'
+timestamp: '2024-01-05T08:50:55+00:00'
 requested_by: wirtaw
 provider: github
 branch: master
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/wirtaw/exchange-rates
   detection_source: Repo Metadata
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
@@ -26,6 +28,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/wirtaw/exchange-rates
   detection_source: Repo Metadata
 - name: ExpressJS
   description: Sinatra inspired web development framework for node.js -- insanely
@@ -66,6 +69,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source_url: https://github.com/wirtaw/exchange-rates/blob/master/package.json
   detection_source: package.json
   last_updated_by: Poplavskij Vladimir
   last_updated_on: 2022-04-13 21:15:08.000000000 Z
@@ -91,6 +95,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source_url: https://github.com/wirtaw/exchange-rates/blob/master/package.json
   detection_source: package.json
   last_updated_by: Poplavskij Vladimir
   last_updated_on: 2022-04-13 21:15:08.000000000 Z
@@ -102,6 +107,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/wirtaw/exchange-rates
   detection_source: Repo Metadata
 - name: Jest
   description: Painless JavaScript Unit Testing
@@ -153,6 +159,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/wirtaw/exchange-rates/blob/master/package.json
   detection_source: package.json
   last_updated_by: Poplavskij Vladimir
   last_updated_on: 2022-04-13 21:15:08.000000000 Z
